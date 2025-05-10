@@ -1,10 +1,23 @@
-
+import { useState } from 'react';
 import { StyleSheet, Text, TextInput, View, TouchableOpacity } from 'react-native';
 
 export default function App() {
+  const[peso, setPeso] = useState('');
+  const[altura, setAltura] = useState('');
 
+  const[resultado, setResultado] = useState('');
+  
   function calcularImc(){
-    alert("Calculo do IMC");
+    let alturaEmMetro = parseFloat(altura) / 100;
+    let result = parseFloat(peso) / (alturaEmMetro * alturaEmMetro);
+    setResultado("valor do IMC: " + result.toFixed(2));
+    
+    let msg = "";
+    if (result < 18.5){
+      msg = "Abaixo do peso";
+      
+    } 
+    setResultado ("Valor do IMC: " + result.toFixed(2) + "" + msg);
   }
 
   return (
@@ -16,6 +29,8 @@ export default function App() {
           <TextInput 
             style={styles.input}
             keyboardType='numeric'
+            value={peso}
+            onChangeText = {(valor) => setPeso(valor)}
           />
       </View>
       <View style={styles.bloco}>
@@ -23,6 +38,8 @@ export default function App() {
           <TextInput 
             style={styles.input}
             keyboardType='numeric'
+            value={altura}
+            onChangeText = {(valor) => setAltura(valor)}
             
           />
       </View>
