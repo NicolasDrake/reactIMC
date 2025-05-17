@@ -15,9 +15,23 @@ export default function App() {
     let msg = "";
     if (result < 18.5){
       msg = "Abaixo do peso";
-      
-    } 
-    setResultado ("Valor do IMC: " + result.toFixed(2) + "" + msg);
+    }
+    else if (result < 25){
+      msg = "Peso ideal";
+    }
+    else if (result < 30){
+      msg = "Levemente acima do peso";
+    }
+    else if (result < 35){
+      msg = "Obesidade grau I";
+    }
+    else if (result < 40){
+      msg = "Obesidade grau II (severa)";
+    }
+    else {
+      msg = "Obesidade grau III (mórbida)";
+    }
+    setResultado ("Valor do IMC: " + result.toFixed(2) + " " + msg);
   }
 
   return (
@@ -47,6 +61,9 @@ export default function App() {
           <TouchableOpacity style={styles.btn} onPress={calcularImc} >
               <Text style={styles.btnTxt}>Calcular</Text>
           </TouchableOpacity>
+      </View>
+      <View style={styles.bloco}>
+        <Text style={styles.titulo}>{resultado}</Text>
       </View>
     </View>
   );
